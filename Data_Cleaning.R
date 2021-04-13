@@ -9,10 +9,7 @@ ESS.data <- read.csv("ESS1-9e01_1.csv", header = T, na = "NA")
 
 #Subsetting the data
 
-##ESS
 ESS.subset <- subset(ESS.data, select = c(cntry, stfdem, gndr,agea, pdjobyr, hinctnta, clsprty, polintr, trstprl, eisced))
-
-#### Winner and Education is missing
 
 #Recoding the variables 
 
@@ -38,7 +35,6 @@ ESS.subset$eisced.rc <- recode(ESS.subset$eisced,'c(2,3,4)=2;c(5,6)=3;7=4;c(55,0
 ESS.subset <- subset(ESS.subset, select = - c(pdjobyr, hinctnta, polintr, eisced))
 
 #### What is missing: Trust in Institutions Mean, Winner Loser Dummy Variable
-
 
 #####################
 
