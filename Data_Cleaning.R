@@ -6,7 +6,6 @@
 setwd("~/Desktop/Replication")
 
 ESS.data <- read.csv("ESS1-9e01_1.csv", header = T, na = "NA")
-ESS.data$agea
 
 #Subsetting the data
 
