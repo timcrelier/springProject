@@ -1,22 +1,12 @@
-#Loading the Data into R
 
-## ESS Data
+## Data Cleaning ##
+
+##ESS-Data
 
 setwd("~/Desktop/Replication")
 
 ESS.data <- read.csv("ESS1-9e01_1.csv", header = T, na = "NA")
 ESS.data$agea
-
-## Golder 
-
-setwd("~/Desktop/Replication")
-
-Golder.data <- read.csv("es_data-v2_0_1.csv", header = T, na = "NA")
-
-## DPI 
-
-DPI.data <- read.csv("Database_of_political_institutions_2015.csv", header = T, na = "NA")
-DPI.data$pr
 
 #Subsetting the data
 
@@ -50,8 +40,23 @@ ESS.subset$polintr.rc <- recode(ESS.subset$polintr,'c(7,8,9)="NA"')
 
 ESS.subset$eisced.rc <- recode(ESS.subset$eisced,'c(2,3,4)=2;c(5,6)=3;7=4;c(55,0)="NA"')
 
-
 #Treating refused answers, "Dont know" answers etc. as missing values - or should we use methods like multiple imputation?
 
-ESS.subset <- subset (ESS.subset, select = - c(agea, clsprty, pdjobyr, hinctnta, polintr, eisced))
+ESS.subset <- subset(ESS.subset, select = - c(pdjobyr, hinctnta, polintr, eisced))
+
+#### What is missing: Trust in Institutions Mean, Winner Loser Dummy Variable
+
+
+#####################
+
+## Golder 
+
+setwd("~/Desktop/Replication")
+
+Golder.data <- read.csv("es_data-v2_0_1.csv", header = T, na = "NA")
+
+## DPI 
+
+DPI.data <- read.csv("Database_of_political_institutions_2015.csv", header = T, na = "NA")
+DPI.data$pr
 
