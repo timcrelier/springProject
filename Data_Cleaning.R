@@ -21,9 +21,9 @@ DPI.data$pr
 #Subsetting the data
 
 ##ESS
+ESS.subset <- subset(ESS.data, select = c(cntry, stfdem, gndr,agea, pdjobyr, hinctnta, clsprty, polintr, trstprl, eisced))
 
-ESS.subset <- subset(ESS.data, select = c(cntry, stfdem, gndr,agea, pdjobyr, hinctnta, clsprty, polintr, trstprl))
-# Winner and Education is missing
+#### Winner and Education is missing
 
 #Recoding the variables 
 
@@ -34,14 +34,24 @@ ESS.subset <- subset(ESS.data, select = c(cntry, stfdem, gndr,agea, pdjobyr, hin
 install.packages("car")
 library(car)
 
-# How to go about values that are not anwered? 
+#Recoding
 
 ESS.subset$gndr.rc <- as.numeric(ESS.subset$gndr=="2")
-ESS.subset$clsprty.rc <- as.numeric(ESS.subset$clsprty=="1")
 
-ESS.subset$agea.rc <- recode(ESS.subset$agea,'"<21"=1;"22-30"=2;"31-40"=3;"41-50"=4;"51-60"=5;"61-70"=6;">71"=7')
-EES.subset$hinctnta.rc <- recode(ESS.subset$hinctnta, '"1-3"=1;"4-7"=2;"8-10"=3')
+ESS.subset$agea.rc <- recode(ESS.subset$agea,'0:21=1;22:30=2;31:40=3;41:50=4;51:60=5;61:70=6;71:90=7')
 
-#Treating refused answers, "Dont know" answers as missing values"? 
+ESS.subset$pdjobyr.rc <- recode(ESS.subset$pdjobyr, '2012=1;1950:2012=0;c(6666,7777,8888,9999)="NA"')
 
-ESS.subset <- subset (ESS.subset, select = - c(gndr, agea))
+ESS.subset$hinctnta.rc <- recode(ESS.subset$hinctnta, '1:3=1;4:7=2;8:10=3;c(77,88,99)="NA"')
+
+ESS.subset$clsprty.rc <- recode(ESS.subset$clsprty,'2=0;c(7,8,9)="NA"')
+
+ESS.subset$polintr.rc <- recode(ESS.subset$polintr,'c(7,8,9)="NA"')
+
+ESS.subset$eisced.rc <- recode(ESS.subset$eisced,'c(2,3,4)=2;c(5,6)=3;7=4;c(55,0)="NA"')
+
+
+#Treating refused answers, "Dont know" answers etc. as missing values - or should we use methods like multiple imputation?
+
+ESS.subset <- subset (ESS.subset, select = - c(agea, clsprty, pdjobyr, hinctnta, polintr, eisced))
+
