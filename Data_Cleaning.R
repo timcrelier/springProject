@@ -16,14 +16,8 @@ ESS.subset <- subset(ESS.data, select = c(cntry, stfdem, gndr,agea, pdjobyr, hin
 
 #Recoding the variables 
 
-##ESS 
-
-#Using the car library
-
 install.packages("car")
 library(car)
-
-#Recoding
 
 ESS.subset$gndr.rc <- as.numeric(ESS.subset$gndr=="2")
 
